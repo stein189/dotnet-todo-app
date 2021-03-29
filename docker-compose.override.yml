@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  my-app:
+    image: codehub/dotnet:build
+    container_name: dotnet_build
+    build:
+      context: .
+      target: build-env
+    volumes:
+      - ./:/app
+
+networks:
+    default:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.host_binding_ipv4: 127.0.0.1

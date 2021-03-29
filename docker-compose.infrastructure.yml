@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:3.6-management
+        networks:
+            default:
+                aliases:
+                    - rabbitmq.service.dev
+        ports:
+            - 15672:15672
+        environment:
+            SERVICE_15672_NAME: rabbitmq
+
+networks:
+    default:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.host_binding_ipv4: 127.0.0.1

@@ -6,12 +6,13 @@ using System.Text.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Projection
+namespace Todo.Projection
 {
     class Program
     {
         static void Main(string[] args)
         {
+            /* @todo use IOC container for managing DI */
             var connectionProvider = new RabbitMQConnectionProvider();
             var channel = connectionProvider.CreateChannel();
             var eventHandler = new TodoEventHandler();
@@ -26,7 +27,7 @@ namespace Projection
                 }
             );
 
-            consumer.Start();
+            consumer.Consume();
         }
     }
 }

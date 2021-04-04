@@ -1,4 +1,4 @@
-namespace Projection {
+namespace Todo {
     public class TodoCreated : Event {
         public string Title {
             get;

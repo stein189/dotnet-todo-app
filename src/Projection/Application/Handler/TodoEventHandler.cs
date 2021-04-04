@@ -1,6 +1,6 @@
 using System;
 
-namespace Projection
+namespace Todo.Projection
 {
     public class TodoEventHandler
     {

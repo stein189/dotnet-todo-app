@@ -1,7 +1,7 @@
 using System;
 using RabbitMQ.Client;
 
-namespace Projection
+namespace Todo.Projection
 {
     public class RabbitMQConnectionProvider
     {

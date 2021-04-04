@@ -1,4 +1,4 @@
-namespace Projection 
+namespace Todo.Projection 
 {
     internal class ConsumerConfig 
     {

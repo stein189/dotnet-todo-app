@@ -5,7 +5,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace Projection 
+namespace Todo.Projection 
 {
     internal abstract class Consumer 
     {
@@ -18,7 +18,7 @@ namespace Projection
             this.channel = channel;
         }
 
-        public abstract void Start();
+        protected abstract void HandleMessage(Object model, BasicDeliverEventArgs args);
 
         /** @todo this shouldn't be here, remove after basic testing is no longer needed */
         public void Publish() 
@@ -38,11 +38,11 @@ namespace Projection
             Console.WriteLine(" [x] Sent {0}", message);
         }
 
-        public void Consume(EventHandler<BasicDeliverEventArgs> handler) {
+        public void Consume() {
             this.Setup();
             
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += handler;
+            consumer.Received += this.HandleMessage;
             
             this.channel.BasicConsume(
                 queue: this.config.queue,
@@ -54,7 +54,7 @@ namespace Projection
             Console.ReadLine();
         }
 
-        public void Setup() {
+        private void Setup() {
             this.channel.ExchangeDeclare(exchange: this.config.exchange, type: this.config.exchangeType);
             this.channel.QueueDeclare(
                 queue: this.config.queue, 

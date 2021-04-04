@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace Projection.Test
+namespace Todo.Projection.Test
 {
     public class UnitTest1
     {

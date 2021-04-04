@@ -5,7 +5,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace Projection
+namespace Todo.Projection
 {
     internal class TodoConsumer : Consumer
     {
@@ -16,12 +16,7 @@ namespace Projection
             this.eventHandler = eventHandler;
         }
 
-        public override void Start()
-        {
-            this.Consume(this.HandleMessage);
-        }
-
-        public void HandleMessage(Object model, BasicDeliverEventArgs args) 
+        protected override void HandleMessage(Object model, BasicDeliverEventArgs args) 
         {
             var body = args.Body.ToArray();
             string jsonString = Encoding.UTF8.GetString(body);
